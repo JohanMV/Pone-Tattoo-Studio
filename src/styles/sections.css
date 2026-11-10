@@ -95,7 +95,7 @@
 }
 
 @media (min-width: 701px) {
-  .hero { align-items: center; min-height: max(625px, 56.28vw); }
+  .hero { align-items: center; min-height: 100vh; min-height: 100svh; }
   .hero-picture { height: 100%; }
   .hero-picture img { object-position: center; }
   .hero-picture::after { background: linear-gradient(90deg, #070707ce 0%, #070707b8 26%, #07070742 54%, transparent 75%), linear-gradient(0deg, #0707075e 0%, transparent 18%, transparent 88%, #07070778 100%); }
