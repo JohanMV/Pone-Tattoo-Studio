@@ -1,0 +1,53 @@
+.quote-grid { display: grid; gap: clamp(24px, 4vw, 70px); align-items: center; }
+.quote .display-title { font-size: clamp(3.15rem, 6.3vw, 6.85rem); }
+.quote .display-title em { font-size: 1.04em; }
+.quote .body-copy { margin-top: clamp(17px, 2vw, 33px); }
+.quote .facts { margin-top: clamp(23px, 3.25vw, 55px); grid-template-columns: 1fr; gap: clamp(11px, 1.75vw, 27px); }
+.quote .facts li { border: 0; padding: 0; gap: clamp(10px, 2.05vw, 35px); font-size: clamp(.95rem, 1.46vw, 1.45rem); }
+.quote .facts span { border-inline-start: 1px solid #797979; padding-inline-start: clamp(10px, 1.7vw, 28px); }
+.quote-panel { min-width: 0; border: 1px solid #797979; background: #101112; padding: clamp(16px, 2.1vw, 35px); }
+.form-title { display: flex; gap: clamp(9px, 1.4vw, 24px); align-items: center; margin-bottom: clamp(15px, 1.5vw, 25px); font: 400 clamp(1.6rem, 2.7vw, 2.65rem)/1 var(--font-display); text-transform: uppercase; }
+.form-title svg { width: clamp(24px, 3.1vw, 48px); height: auto; flex: none; color: var(--color-accent); }
+.quote-reference { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding: 12px; border: 1px solid var(--color-line); background: #191b1e; }
+.quote-reference img { width: 72px; height: 72px; flex: none; object-fit: cover; }
+.quote-reference div { display: grid; gap: 3px; min-width: 0; }
+.quote-reference strong { font: 400 1.35rem/1.1 var(--font-display); text-transform: uppercase; }
+.quote-reference span { color: var(--color-muted); font-size: .82rem; }
+.form-grid { display: grid; gap: clamp(10px, 1.15vw, 18px) clamp(14px, 1.75vw, 29px); }
+.field { min-width: 0; }
+.field--wide { grid-column: 1 / -1; }
+.field label { display: block; margin-bottom: 6px; font-size: clamp(.84rem, 1.07vw, 1.04rem); font-weight: 600; }
+.field-inner { position: relative; }
+.field-inner svg { position: absolute; top: 12px; left: 13px; width: 20px; height: 20px; stroke-width: 1.65; pointer-events: none; }
+.field-inner input, .field-inner select, .field-inner textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 9px 12px 9px 42px;
+  border: 1px solid #737373;
+  background: #202020;
+  color: var(--color-paper);
+  font-size: clamp(.94rem, 1.11vw, 1.04rem);
+}
+.field-inner input::placeholder, .field-inner textarea::placeholder { color: #bdbdbd; }
+.field-inner textarea { display: block; resize: vertical; }
+.field-inner select { appearance: auto; padding-right: 8px; }
+.field-inner .field-reference { min-height: 60px; border-style: dashed; }
+.field-inner:has(.field-reference) svg { top: 20px; }
+.field-inner :focus-visible { outline-offset: 1px; }
+.field-inner :user-invalid { border-color: #ff7373; }
+.form-help { color: var(--color-muted); font-size: .82rem; line-height: 1.4; }
+.form-grid > .form-help { margin-top: -3px; }
+.submit-action { width: 100%; margin-block: 18px 10px; }
+.draft-status { margin-top: 12px; font-size: .86rem; }
+.draft-status a { color: var(--color-accent-hover); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (min-width: 620px) {
+  .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .quote-grid { grid-template-columns: minmax(0, .94fr) minmax(0, 1fr); }
+}
+@media (max-width: 619px) {
+  .field-inner input, .field-inner select, .field-inner textarea { font-size: 16px; }
+}
+

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 106" fill="#f4f0ea">
+  <path d="m48 34-5-20 15 12 8-23 8 23 15-12-5 20c-12-7-24-7-36 0Z" fill="none" stroke="#f4f0ea" stroke-width="3"/>
+  <path d="M2 38h26c11 0 17 5 17 14S39 67 28 67H12v10H2V57h26c4 0 6-2 6-5s-2-5-6-5H2Zm65-1c14 0 24 8 24 20s-10 21-24 21-24-9-24-21 10-20 24-20Zm0 9c-8 0-13 4-13 11s5 12 13 12 13-5 13-12-5-11-13-11Zm27-8h10l23 24V38h10v39h-10l-23-24v24H94Zm48 0h36v9h-36Zm0 14h33v9h-23v7h26v9h-36Z"/>
+  <text x="91" y="96" fill="#f4f0ea" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="600" textLength="174" lengthAdjust="spacing">TATTOO STUDIO</text>
+  <path d="M62 104h57" stroke="#F36B21" stroke-width="2"/>
+</svg>

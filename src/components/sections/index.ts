@@ -1,0 +1,7 @@
+export { Artist } from './Artist'
+export { Hero } from './Hero'
+export { Portfolio } from './Portfolio'
+export { Quote } from './Quote'
+export { Social } from './Social'
+export { Studio } from './Studio'
+export { Styles } from './Styles'
