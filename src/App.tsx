@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ArtistPage } from '@/features/artist/ArtistPage'
 import { Artist, Hero, Portfolio, Quote, Social, Studio, Styles } from '@/components/sections'
 import { Action, Eyebrow, Title } from '@/components/ui'
 import { PortfolioCatalog, WorkGallery } from '@/features/portfolio'
@@ -34,7 +35,7 @@ export default function App() {
     <Route element={<MainLayout />}>
       <Route index element={<Home />} />
       <Route path="portafolio" element={<PortfolioPage />} />
-      <Route path="artista" element={<Artist standalone />} />
+      <Route path="artista" element={<ArtistPage />} />
       <Route path="estudio" element={<Studio standalone />} />
       <Route path="contacto" element={<Quote form={<QuoteForm />} standalone />} />
       <Route path="*" element={<NotFound />} />

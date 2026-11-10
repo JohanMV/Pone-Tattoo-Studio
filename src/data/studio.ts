@@ -6,7 +6,7 @@ export const contact = {
   artist: 'https://www.instagram.com/pone.reyes/',
   tiktok: 'https://www.tiktok.com/@ponetattoostudio',
   maps: 'https://www.google.com/maps/search/?api=1&query=Pone+Tattoo+Studio+Miraflores+Lima',
-  whatsapp: 'https://wa.me/51922990131',
+  whatsapp: 'https://wa.me/51916842610',
 }
 
 export const media = (name: string) => `/media/${name}.webp`
@@ -37,9 +37,9 @@ export const works: Work[] = [
   { image: 'casco', additionalImages: ['casco-vista-2', 'casco-vista-3'], name: 'Casco galáctico', styles: ['ilustrativo-anime', 'color'], alt: 'Tatuaje de un casco galáctico en tonos fucsia y cian' },
   { image: 'horus', additionalImages: ['horus-vista-2', 'horus-vista-3'], name: 'Ojo de Horus', styles: ['black-grey'], alt: 'Tatuaje negro del ojo de Horus con el iris rojo' },
   { image: 'colibri', additionalImages: ['colibri-vista-2', 'colibri-vista-3'], name: 'Colibrí', styles: ['fine-line'], alt: 'Tatuaje de línea fina con perfil de mujer, luna creciente, flores y colibrí' },
-  { image: 'realismo', name: 'Escultura clásica', styles: ['realismo', 'black-grey'], alt: 'Tatuaje realista de una figura clásica barbada' },
-  { image: 'tigre', name: 'Mirada felina', styles: ['black-grey', 'realismo'], alt: 'Tatuaje de tigre en negro y gris con ojos turquesa' },
-  { image: 'anime', name: 'Dragón y guerrero', styles: ['ilustrativo-anime', 'color'], alt: 'Tatuaje a color de un personaje de anime y un dragón verde' },
+  { image: 'realismo', additionalImages: ['realismo-vista-2'], name: 'Escultura clásica', styles: ['realismo', 'black-grey'], alt: 'Tatuaje realista de una figura clásica barbada' },
+  { image: 'tigre', additionalImages: ['tigre-vista-2'], name: 'Mirada felina', styles: ['black-grey', 'realismo'], alt: 'Tatuaje de tigre en negro y gris con ojos turquesa' },
+  { image: 'anime', additionalImages: ['anime-vista-2'], name: 'Dragón y guerrero', styles: ['ilustrativo-anime', 'color'], alt: 'Tatuaje a color de un personaje de anime y un dragón verde' },
 ]
 
 export function styleLabel(slug: StyleSlug) {

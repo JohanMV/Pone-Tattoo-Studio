@@ -64,7 +64,7 @@ export function QuoteForm() {
         </select>}
       </Field>
       <Field name="estilo" label="Estilo de tatuaje" icon={Layers} wide>{(id) =>
-        <select id={id} name="estilo" defaultValue="">
+        <select key={selectedWork?.image ?? 'sin-referencia'} id={id} name="estilo" defaultValue={selectedWork ? styleLabel(selectedWork.styles[0]) : ''}>
           <option value="">Selecciona un estilo</option>
           {styles.map((style) => <option key={style.slug}>{style.label}</option>)}
           <option>Necesito asesoría</option>

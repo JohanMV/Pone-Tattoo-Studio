@@ -1,4 +1,4 @@
-import { ArrowUpRight, ChevronLeft, ChevronRight, Images, Maximize2 } from 'lucide-react'
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Dialog } from '@/components/ui'
@@ -8,6 +8,25 @@ import type { Work } from '@/data/studio'
 interface GalleryProps { items: Work[]; featured?: boolean }
 
 interface PortfolioCardProps { work: Work; onOpen: (index: number) => void }
+
+const previousPhoto = (index: number, count: number) => (index - 1 + count) % count
+const nextPhoto = (index: number, count: number) => (index + 1) % count
+
+function FeaturedCard({ work, onOpen }: PortfolioCardProps) {
+  const [index, setIndex] = useState(0)
+  const photos = [work.image, ...(work.additionalImages ?? [])]
+
+  return <article className="work-tile photo-tile">
+    <button type="button" className="work-tile-image" onClick={() => onOpen(index)} aria-label={`Ampliar ${work.name}, foto ${index + 1} de ${photos.length}`}>
+      <img src={media(photos[index])} alt={`${work.alt}, vista ${index + 1} de ${photos.length}`} width="850" height="750" loading="lazy" decoding="async" />
+      <span className="work-caption"><span>{styleLabel(work.styles[0])}</span></span>
+    </button>
+    {photos.length > 1 && <div className="portfolio-card-arrows work-tile-arrows" aria-label={`Fotos de ${work.name}`}>
+      <button type="button" aria-label={`Foto anterior de ${work.name}`} onClick={() => setIndex((value) => previousPhoto(value, photos.length))}><ChevronLeft aria-hidden="true" /></button>
+      <button type="button" aria-label={`Foto siguiente de ${work.name}`} onClick={() => setIndex((value) => nextPhoto(value, photos.length))}><ChevronRight aria-hidden="true" /></button>
+    </div>}
+  </article>
+}
 
 function PortfolioCard({ work, onOpen }: PortfolioCardProps) {
   const [index, setIndex] = useState(0)
@@ -19,8 +38,8 @@ function PortfolioCard({ work, onOpen }: PortfolioCardProps) {
         <img src={media(photos[index])} alt={`${work.alt}, vista ${index + 1} de ${photos.length}`} width="850" height="750" loading="lazy" decoding="async" />
       </button>
       {photos.length > 1 && <div className="portfolio-card-arrows" aria-label={`Fotos de ${work.name}`}>
-        <button type="button" aria-label={`Foto anterior de ${work.name}`} disabled={index === 0} onClick={() => setIndex((value) => value - 1)}><ChevronLeft aria-hidden="true" /></button>
-        <button type="button" aria-label={`Foto siguiente de ${work.name}`} disabled={index === photos.length - 1} onClick={() => setIndex((value) => value + 1)}><ChevronRight aria-hidden="true" /></button>
+        <button type="button" aria-label={`Foto anterior de ${work.name}`} onClick={() => setIndex((value) => previousPhoto(value, photos.length))}><ChevronLeft aria-hidden="true" /></button>
+        <button type="button" aria-label={`Foto siguiente de ${work.name}`} onClick={() => setIndex((value) => nextPhoto(value, photos.length))}><ChevronRight aria-hidden="true" /></button>
       </div>}
     </div>
     <div className="portfolio-card-info">
@@ -37,17 +56,13 @@ export function WorkGallery({ items, featured }: GalleryProps) {
 
   return <>
     <div className={`work-grid ${featured ? 'work-grid--featured' : ''}`}>
-      {items.map((work) => featured ? <button key={work.image} type="button" className="work-tile photo-tile"
-        onClick={() => { setPhotoIndex(0); setSelected(work) }} aria-label={`Ver fotos: ${work.name}`}>
-        <img src={media(work.image)} alt={work.alt} width="850" height="750" loading="lazy" decoding="async" />
-        {work.additionalImages?.length && <span className="work-count"><Images aria-hidden="true" /> {1 + work.additionalImages.length}</span>}
-        <span className="work-caption"><span>{styleLabel(work.styles[0])}</span><Maximize2 aria-hidden="true" /></span>
-      </button> : <PortfolioCard key={work.image} work={work} onOpen={(index) => { setPhotoIndex(index); setSelected(work) }} />)}
+      {items.map((work) => featured ? <FeaturedCard key={work.image} work={work} onOpen={(index) => { setPhotoIndex(index); setSelected(work) }} />
+        : <PortfolioCard key={work.image} work={work} onOpen={(index) => { setPhotoIndex(index); setSelected(work) }} />)}
     </div>
     {selected && <Dialog title={selected.name} onClose={() => setSelected(null)} className={`work-dialog${photos.length > 1 ? ' work-dialog--multiple' : ''}`}>
       <figure onKeyDown={(event) => {
-        if (event.key === 'ArrowLeft') setPhotoIndex((index) => Math.max(0, index - 1))
-        if (event.key === 'ArrowRight') setPhotoIndex((index) => Math.min(photos.length - 1, index + 1))
+        if (event.key === 'ArrowLeft') setPhotoIndex((index) => previousPhoto(index, photos.length))
+        if (event.key === 'ArrowRight') setPhotoIndex((index) => nextPhoto(index, photos.length))
       }}>
         <img src={media(photos[photoIndex])} alt={`${selected.alt}, vista ${photoIndex + 1} de ${photos.length}`} />
         <figcaption>
@@ -56,8 +71,8 @@ export function WorkGallery({ items, featured }: GalleryProps) {
           {photos.length > 1 && <span className="work-photo-count" aria-live="polite">{photoIndex + 1} / {photos.length}</span>}
         </figcaption>
         {photos.length > 1 && <div className="work-navigation" aria-label="Fotos del tatuaje">
-          <button type="button" aria-label="Foto anterior" disabled={photoIndex === 0} onClick={() => setPhotoIndex((index) => index - 1)}><ChevronLeft aria-hidden="true" /></button>
-          <button type="button" aria-label="Foto siguiente" disabled={photoIndex === photos.length - 1} onClick={() => setPhotoIndex((index) => index + 1)}><ChevronRight aria-hidden="true" /></button>
+          <button type="button" aria-label="Foto anterior" onClick={() => setPhotoIndex((index) => previousPhoto(index, photos.length))}><ChevronLeft aria-hidden="true" /></button>
+          <button type="button" aria-label="Foto siguiente" onClick={() => setPhotoIndex((index) => nextPhoto(index, photos.length))}><ChevronRight aria-hidden="true" /></button>
         </div>}
       </figure>
     </Dialog>}

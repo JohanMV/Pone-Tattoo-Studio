@@ -1,22 +1,36 @@
 import { CalendarCheck, MapPin, PenTool } from 'lucide-react'
+import { useState } from 'react'
 import { contact, media } from '@/data/studio'
 import { Action, Eyebrow, Facts, InstagramIcon, Title } from '@/components/ui'
 
 interface ArtistProps { standalone?: boolean }
 
 const images = [
-  { file: 'artista-principal', alt: 'Ilustración de un tatuador usando una máquina en el brazo de un cliente' },
-  { file: 'artista-retrato', alt: 'Retrato ilustrativo en blanco y negro de un tatuador' },
-  { file: 'artista-boceto', alt: 'Ilustración de un tatuador dibujando un boceto en papel' },
-  { file: 'artista-sesion', alt: 'Ilustración de un tatuador con gorra trabajando durante una sesión' },
+  { file: 'pone-hero', alt: 'Ilustración de un tatuador trabajando, recortada de la imagen principal del sitio', position: 'center 35%' },
+  { file: 'pone-trabajando', alt: 'Pone Reyes trabajando en un tatuaje', position: 'center 40%' },
+  { file: 'pone-retrato', alt: 'Retrato de Pone Reyes con camiseta del estudio', position: 'center 25%' },
+  { file: 'pone-convencion', alt: 'Pone Reyes con un premio junto al tatuaje de una clienta', position: 'center 35%' },
 ]
 
 export function Artist({ standalone = false }: ArtistProps) {
+  const [collage, setCollage] = useState(images)
+
+  function swapImage(index: number) {
+    setCollage((current) => {
+      const next = [...current]
+      ;[next[0], next[index]] = [next[index], next[0]]
+      return next
+    })
+  }
+
   return <section id="artista" className="section artist textured-corner" aria-labelledby="artist-title">
     <div className="container artist-grid">
       <figure data-reveal className="artist-media">
         <div className="artist-collage">
-          {images.map(({ file, alt }) => <img key={file} src={media(file)} alt={alt} width="700" height="700" loading={standalone && file === 'artista-principal' ? 'eager' : 'lazy'} decoding="async" />)}
+          <img src={media(collage[0].file)} alt={collage[0].alt} style={{ objectPosition: collage[0].position }} width="700" height="700" loading={standalone ? 'eager' : 'lazy'} decoding="async" />
+          {collage.slice(1).map(({ file, alt, position }, index) => <button key={index} type="button" className="artist-thumbnail" onClick={() => swapImage(index + 1)} aria-label={`Mostrar imagen principal: ${alt}`}>
+            <img src={media(file)} alt="" style={{ objectPosition: position }} width="700" height="700" loading="lazy" decoding="async" />
+          </button>)}
         </div>
       </figure>
       <div data-reveal className="artist-copy">
@@ -30,7 +44,7 @@ export function Artist({ standalone = false }: ArtistProps) {
           { icon: CalendarCheck, label: <>Atención<br />previa cita</> },
         ]} />
         <div className="actions">
-          <Action to="/contacto" tone="primary" arrow>Cotiza tu idea</Action>
+          <Action to="/artista" tone="primary" arrow>Reconocimientos</Action>
           <Action to={contact.artist} icon={InstagramIcon}>Instagram del artista</Action>
         </div>
       </div>

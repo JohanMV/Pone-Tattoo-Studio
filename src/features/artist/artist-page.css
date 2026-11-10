@@ -1,0 +1,138 @@
+.artist-awards {
+  overflow-x: clip;
+}
+
+.artist-awards-header {
+  position: relative;
+  z-index: -1;
+  display: grid;
+  align-items: end;
+  gap: 18px clamp(24px, 5vw, 76px);
+  margin-bottom: clamp(26px, 4vw, 56px);
+}
+
+.artist-awards-header::before {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  top: var(--nav-height);
+  left: 50%;
+  width: 100vw;
+  height: calc(100vh - var(--nav-height));
+  height: calc(100svh - var(--nav-height));
+  transform: translateX(-50%);
+  pointer-events: none;
+  background-color: var(--color-ink);
+  background-image:
+    linear-gradient(180deg, transparent 82%, var(--color-ink) 100%),
+    linear-gradient(90deg, var(--color-ink) 0%, #0d0f11c9 42%, #0d0f1140 78%),
+    url('/media/artista-fondo.webp');
+  background-size: 100% 100%, 100% 100%, cover;
+  background-position: center, center, right 15%;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 700px) {
+  .artist-awards-header::before {
+    background-image:
+      linear-gradient(180deg, transparent 82%, var(--color-ink) 100%),
+      linear-gradient(90deg, #0d0f11f7 0%, #0d0f11dc 52%, #0d0f1155 100%),
+      url('/media/artista-fondo.webp');
+    background-position: center, center, right -40vw top 15%;
+  }
+}
+
+.artist-awards-header .display-title {
+  font-size: clamp(2rem, 10vw, 5.6rem);
+}
+
+.artist-awards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 1.15vw, 18px);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.artist-awards-grid li {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 8px;
+}
+
+.artist-awards-expand {
+  position: absolute;
+  inset: 0;
+}
+
+.artist-awards-expand svg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  padding: 7px;
+  color: var(--color-paper);
+  background: var(--color-ink);
+  border: 1px solid var(--color-line);
+}
+
+.artist-awards-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: var(--color-graphite);
+}
+
+.artist-awards-caption {
+  padding: clamp(10px, 1.25vw, 20px);
+  background: var(--color-panel);
+}
+
+.artist-awards-caption::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin-bottom: 9px;
+  background: var(--color-accent);
+}
+
+.artist-awards-caption time {
+  color: var(--color-accent-hover);
+  font-size: .875rem;
+  font-weight: 700;
+}
+
+.artist-awards-caption h2 {
+  margin: 6px 0;
+  font: 400 clamp(1.18rem, 2vw, 1.85rem)/1.08 var(--font-display);
+}
+
+.artist-awards-caption p {
+  color: var(--color-muted);
+  font-size: clamp(.875rem, 1.2vw, 1rem);
+  line-height: 1.45;
+}
+
+.artist-awards-actions {
+  justify-content: center;
+  margin-top: clamp(24px, 3vw, 44px);
+}
+
+@media (min-width: 64rem) {
+  .artist-awards-header {
+    grid-template-columns: minmax(0, 1fr) minmax(0, .56fr);
+  }
+
+  .artist-awards-header .display-title {
+    font-size: clamp(3.65rem, 6vw, 5.6rem);
+  }
+
+  .artist-awards-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

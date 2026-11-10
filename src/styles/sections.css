@@ -44,8 +44,11 @@
 .artist-media { position: relative; }
 .artist-collage { display: grid; grid-template-columns: 2.55fr 1fr; grid-template-rows: repeat(3, 1fr); gap: clamp(6px, 1vw, 17px); position: relative; aspect-ratio: 1.02; }
 .artist-collage img { width: 100%; height: 100%; min-height: 0; object-fit: cover; background: var(--photo-bg); }
-.artist-collage img:first-child { grid-row: 1 / -1; object-position: 49% center; }
-.artist-collage img:nth-child(2) { object-position: center 35%; }
+.artist-collage > img { grid-row: 1 / -1; object-position: 49% center; }
+.artist-thumbnail { min-width: 0; min-height: 0; overflow: hidden; cursor: pointer; }
+.artist-thumbnail img { transition: transform .25s ease; }
+.artist-thumbnail:hover img { transform: scale(1.04); }
+.artist-thumbnail:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
 .artist-collage::before, .artist-collage::after { content: ""; position: absolute; width: 11%; height: 11%; pointer-events: none; border: solid var(--color-accent); }
 .artist-collage::before { inset: -8px auto auto -6px; border-width: 2px 0 0 2px; }
 .artist-collage::after { inset: auto -8px -5px auto; border-width: 0 2px 2px 0; }
